@@ -1,0 +1,5 @@
+{% if message ?? null %}
+  <div class="notification is-{{ variant ?? 'info' }}{{ light ?? false ? ' is-light' : '' }}">
+    {{ message }}
+  </div>
+{% endif %}

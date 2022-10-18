@@ -1,0 +1,11 @@
+{% set messages = flash.getMessages() ?? [] %}
+{% set csrfErrorMessages = messages['csrf_error'] ?? [] %}
+{% if csrfErrorMessages|length > 0 %}
+  {%
+    include 'elements/notification.twig'
+    with {
+      'message': 'フォームの状態が古くなっています。再度送信してください。',
+      'variant': 'danger',
+    }
+  %}
+{% endif %}
