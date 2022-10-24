@@ -2,8 +2,14 @@
     "name": "shimoning/slim4-boilerplate",
     "description": "A Boilerplate of Slim Framework 4",
     "keywords": [
+        "slim",
         "boilerplate",
-        "slim"
+        "dotenv",
+        "csrf",
+        "pdo",
+        "twig",
+        "migration",
+        "seeder"
     ],
     "license": "MIT",
     "authors": [

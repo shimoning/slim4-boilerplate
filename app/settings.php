@@ -14,18 +14,18 @@ return function (ContainerBuilder $containerBuilder) {
         SettingsInterface::class => function () {
             return new Settings([
                 'app' => [
-                    'APP_NAME'  => $_ENV['APP_NAME'],
-                    'APP_URL'   => $_ENV['APP_URL'],
-                    'APP_ENV'   => $_ENV['APP_ENV'],
+                    'APP_NAME'  => $_ENV['APP_NAME'] ?? 'A Boilerplate of Slim Framework 4',
+                    'APP_URL'   => $_ENV['APP_URL'] ?? null,
+                    'APP_ENV'   => $_ENV['APP_ENV'] ?? 'production',
                 ],
                 'db' => [
-                    'DB_HOST'       => $_ENV['DB_HOST'],
-                    'DB_PORT'       => $_ENV['DB_PORT'],
-                    'DB_DATABASE'   => $_ENV['DB_DATABASE'],
-                    'DB_USERNAME'   => $_ENV['DB_USERNAME'],
-                    'DB_PASSWORD'   => $_ENV['DB_PASSWORD'],
-                    'DB_CHARSET'    => $_ENV['DB_CHARSET'],
-                    'DB_COLLATION'  => $_ENV['DB_COLLATION'],
+                    'DB_HOST'       => $_ENV['DB_HOST'] ?? 'localhost',
+                    'DB_PORT'       => $_ENV['DB_PORT'] ?? 3306,
+                    'DB_DATABASE'   => $_ENV['DB_DATABASE'] ?? 'slim',
+                    'DB_USERNAME'   => $_ENV['DB_USERNAME'] ?? 'root',
+                    'DB_PASSWORD'   => $_ENV['DB_PASSWORD'] ?? null,
+                    'DB_CHARSET'    => $_ENV['DB_CHARSET'] ?? 'utf8mb4',
+                    'DB_COLLATION'  => $_ENV['DB_COLLATION'] ?? 'utf8mb4_unicode_ci',
                 ],
                 'path' => [
                     'database'  => __DIR__ . '/../database',
