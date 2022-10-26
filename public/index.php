@@ -23,8 +23,8 @@ ini_set('session.cookie_lifetime', '86400');
 session_start();
 
 // Read dot env
-$dot_env = __DIR__. '/../.env';
-if (is_readable($dot_env)) {
+$dotEnvFile = __DIR__ . '/../.env';
+if (is_readable($dotEnvFile)) {
     $dotenv = Dotenv::createImmutable(__DIR__ . '/../');
     $dotenv->load();
 }
@@ -77,7 +77,7 @@ $request = $serverRequestCreator->createServerRequestFromGlobals();
 // Create Error Handler
 $responseFactory = $app->getResponseFactory();
 $logger = $container->get(LoggerInterface::class);
-$errorHandler = new HttpErrorHandler($callableResolver, $responseFactory, $logger);
+$errorHandler = new HttpErrorHandler($container, $callableResolver, $responseFactory, $logger);
 
 // Create Shutdown Handler
 $shutdownHandler = new ShutdownHandler($request, $errorHandler, $displayErrorDetails);

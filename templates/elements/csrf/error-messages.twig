@@ -1,6 +1,5 @@
 {% set messages = flash.getMessages() ?? [] %}
-{% set csrfErrorMessages = messages['csrf_error'] ?? [] %}
-{% if csrfErrorMessages|length > 0 %}
+{% if messages['csrf_error'] ?? false %}
   {%
     include 'elements/notification.twig'
     with {

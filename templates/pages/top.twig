@@ -6,8 +6,61 @@
         A Boilerplate for Slim 4
       </p>
       <p class="subtitle">
-        Simple Boilerplate to use Twig, Migration, CSRF
+        Simple Boilerplate with Twig, Migration and CSRF Prevention
       </p>
     </div>
   </section>
+
+  <div class="tile is-ancestor my-6">
+    <div class="tile is-vertical is-8">
+      <div class="tile">
+        <div class="tile is-parent is-vertical">
+          <article class="tile is-child notification is-primary">
+            <p class="title">CSRF Prevention</p>
+            <p class="subtitle">Using <strong>`slim/csrf`</strong></p>
+            <div class="content">
+              Please check <a href="/contact" class="has-text-link">Ower Sample</a>.
+            </div>
+          </article>
+          <article class="tile is-child notification is-warning">
+            <p class="title">Migration and Seeding</p>
+            <p class="subtitle">Using <strong>`robmorgan/phinx`</strong></p>
+            <div class="content">
+              Please read <a href="https://book.cakephp.org/phinx/0/en/index.html" target="_blank" class="has-text-link">Official Documentation <i class="fa-solid fa-up-right-from-square"></i> </a>.
+            </div>
+          </article>
+        </div>
+        <div class="tile is-parent">
+          <article class="tile is-child notification is-info">
+            <p class="title">Template engine</p>
+            <p class="subtitle">Using <strong>`slim/twig-view`</strong></p>
+            <div class="content">
+              Please read <a href="https://twig.symfony.com/" target="_blank" class="has-text-link-light">Official Site <i class="fa-solid fa-up-right-from-square"></i> </a>.
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="tile is-parent">
+        <article class="tile is-child notification is-danger">
+          <p class="title">Flash message</p>
+            <p class="subtitle">Using <strong>`slim/flash`</strong></p>
+          <div class="content">
+            Please check <a href="/contact" class="has-text-link">Ower Sample</a>.
+          </div>
+        </article>
+      </div>
+    </div>
+    <div class="tile is-parent">
+      <article class="tile is-child notification is-success">
+        <div class="content">
+          <p class="title">Dot env</p>
+          <p class="subtitle">Using <strong>`vlucas/phpdotenv`</strong></p>
+          <div class="content">
+            Check and Copy <strong>`.env.example`</strong> file.
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
 {% endblock %}

@@ -7,10 +7,12 @@ namespace App\Application\Actions;
 use App\Domain\DomainException\DomainRecordNotFoundException;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
+use Slim\Routing\RouteContext;
 
 use Psr\Log\LoggerInterface;
 use App\Application\Settings\SettingsInterface;
 use Slim\Views\Twig;
+use Slim\Flash\Messages;
 
 use Slim\Exception\HttpBadRequestException;
 use Slim\Exception\HttpNotFoundException;
@@ -20,6 +22,7 @@ abstract class Action
     protected LoggerInterface $logger;
     protected SettingsInterface $settings;
     protected Twig $twig;
+    protected Messages $message;
 
     protected Request $request;
     protected Response $response;
@@ -30,10 +33,12 @@ abstract class Action
         LoggerInterface $logger,
         SettingsInterface $settings,
         Twig $twig,
+        Messages $message,
     ) {
         $this->logger = $logger;
         $this->settings = $settings;
         $this->twig = $twig;
+        $this->message = $message;
     }
 
     /**
@@ -81,6 +86,27 @@ abstract class Action
     }
 
     /**
+     * @return mixed
+     */
+    protected function resolveQuery(string $name, $default = '')
+    {
+        return $this->request->getQueryParams()[$name] ?? $default;
+    }
+
+    /**
+     * @return mixed
+     */
+    protected function resolvePostBody(string $name, $default = '')
+    {
+        return $this->request->getParsedBody()[$name] ?? $default;
+    }
+
+    protected function setFlashMessage(string $key, $message)
+    {
+        $this->message->addMessage($key, $message);
+    }
+
+    /**
      * @param array|object|null $data
      */
     protected function respondWithData($data = null, int $statusCode = 200): Response
@@ -98,6 +124,49 @@ abstract class Action
         return $this->response
                     ->withHeader('Content-Type', 'application/json')
                     ->withStatus($payload->getStatusCode());
+    }
+
+    protected function respondWithValidationError($message): Response
+    {
+        $this->setFlashMessage('validation-error', $message);
+        return $this->redirect($_SERVER['HTTP_REFERER'], 302);
+    }
+
+    /**
+     * ルート名からURLをフルで取得する
+     *
+     * @param string $routeName
+     * @param array $data
+     * @param array $queryParams
+     * @return string
+     */
+    protected function fullUrlFor(
+        string $routeName,
+        array $data = [],
+        array $queryParams = [],
+    ): string {
+        return RouteContext::fromRequest($this->request)
+            ->getRouteParser()
+            ->fullUrlFor(
+                $this->request->getUri(),
+                $routeName,
+                $data,
+                $queryParams,
+            );
+    }
+
+    /**
+     * リダイレクトを行う
+     *
+     * @param string $location
+     * @param integer $status
+     * @return Response
+     */
+    protected function redirect(string $location, int $status = 302): Response
+    {
+        return $this->response
+            ->withStatus($status)
+            ->withHeader('Location', $location);
     }
 
     /**

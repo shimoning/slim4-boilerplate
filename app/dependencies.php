@@ -22,7 +22,7 @@ use Slim\Flash\Messages;
 
 use Slim\Views\Twig;
 use App\Application\Extensions\TwigCsrfExtension;
-
+use App\Exceptions\HttpCsrfException;
 
 return function (ContainerBuilder $containerBuilder) {
     $containerBuilder->addDefinitions([
@@ -62,10 +62,7 @@ return function (ContainerBuilder $containerBuilder) {
                     $request = $request->withAttribute('csrf_status', false);
                     $m->addMessage('csrf_error', true);
 
-                    // 419
-                    return $handler->handle($request)
-                        ->withStatus(419)
-                        ->withHeader('Location', $_SERVER['HTTP_REFERER']);
+                    throw new HttpCsrfException($request);
                 });
         },
         Messages::class => function () {

@@ -1,7 +1,7 @@
 <?php
 
-$dot_env = __DIR__. '/.env';
-if (is_readable($dot_env)) {
+$dotEnvFile = __DIR__ . '/.env';
+if (is_readable($dotEnvFile)) {
     $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
     $dotenv->load();
 }
