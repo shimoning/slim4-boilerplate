@@ -14,9 +14,10 @@ return function (ContainerBuilder $containerBuilder) {
         SettingsInterface::class => function () {
             return new Settings([
                 'app' => [
-                    'APP_NAME'  => $_ENV['APP_NAME'] ?? 'A Boilerplate of Slim Framework 4',
-                    'APP_URL'   => $_ENV['APP_URL'] ?? null,
-                    'APP_ENV'   => $_ENV['APP_ENV'] ?? 'production',
+                    'APP_NAME'          => $_ENV['APP_NAME'] ?? 'A Boilerplate of Slim Framework 4',
+                    'APP_URL'           => $_ENV['APP_URL'] ?? null,
+                    'APP_ENV'           => $_ENV['APP_ENV'] ?? 'production',
+                    'APP_CONTACT_EMAIL' => $_ENV['APP_CONTACT_EMAIL'] ?? null,
                 ],
                 'db' => [
                     'DB_HOST'       => $_ENV['DB_HOST'] ?? 'localhost',

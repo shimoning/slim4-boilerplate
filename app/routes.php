@@ -14,6 +14,9 @@ return function (App $app) {
     });
 
     $app->get('/', \App\Application\Actions\Top\ShowAction::class)->setName('top');
+    $app->get('/contact', \App\Application\Actions\Contact\ShowFormAction::class)->setName('contact.form');
+    $app->post('/contact', \App\Application\Actions\Contact\PostAction::class)->setName('contact.post');
+    $app->get('/contact/complete', \App\Application\Actions\Contact\ShowCompleteAction::class)->setName('contact.complete');
 
     $app->group('/users', function (Group $group) {
         $group->get('', \App\Application\Actions\User\ListUsersAction::class);

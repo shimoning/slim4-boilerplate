@@ -1,0 +1,78 @@
+{% extends 'layouts/default.twig' %}
+{% block content %}
+  <section class="hero is-info">
+    <div class="hero-body">
+      <p class="title">
+        Form sample
+      </p>
+      <p class="subtitle">
+        You can check about `CSRF Prevention` and `Frash message`.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    {% include 'elements/csrf/error-messages.twig' %}
+    {% include 'elements/validation-error.twig' %}
+
+    <form method="post">
+      {% include 'elements/csrf/inputs.twig' %}
+      <div class="field">
+        <label class="label"><span class="has-text-danger pr-1">*</span>Name</label>
+        <div class="control has-icons-left">
+          <input type="text" name="name" class="input" placeholder="Your name input">
+          <span class="icon is-small is-left">
+            <i class="fa-solid fa-signature"></i>
+          </span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label"><span class="has-text-danger pr-1">*</span>Email</label>
+        <div class="control has-icons-left">
+          <input type="email" name="email" class="input" placeholder="Email input">
+          <span class="icon is-small is-left">
+            <i class="fas fa-envelope"></i>
+          </span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label"><span class="has-text-danger pr-1">*</span>Subject</label>
+        <div class="control has-icons-left">
+          <div class="select">
+            <select name="subject">
+              <option value="">Select dropdown</option>
+              <option value="option-1">With options</option>
+            </select>
+          </div>
+          <span class="icon is-small is-left">
+            <i class="fa-solid fa-comment-dots"></i>
+          </span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label"><span class="has-text-danger pr-1">*</span>Message</label>
+        <div class="control">
+          <textarea name="message" class="textarea" placeholder="Textarea"></textarea>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <label class="checkbox">
+            <input type="checkbox" name="agreement" required>
+            I agree to the <a href="#">terms and conditions</a>
+          </label>
+        </div>
+      </div>
+
+      <div class="field is-grouped">
+        <div class="control">
+          <input type="submit" class="button is-link" value="Submit">
+        </div>
+      </div>
+    </form>
+  </section>
+{% endblock %}

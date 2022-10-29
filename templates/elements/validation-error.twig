@@ -1,0 +1,10 @@
+{% set errorMessages = flash.getMessages()['validation-error'] ?? [] %}
+{% for message in errorMessages %}
+  {%
+    include 'elements/notification.twig'
+    with {
+      'message': message,
+      'variant': 'danger',
+    }
+  %}
+{% endfor %}
