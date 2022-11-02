@@ -13,6 +13,7 @@ use Psr\Log\LoggerInterface;
 use App\Application\Settings\SettingsInterface;
 use Slim\Views\Twig;
 use Slim\Flash\Messages;
+use Symfony\Component\Mailer\MailerInterface;
 
 use Slim\Exception\HttpBadRequestException;
 use Slim\Exception\HttpNotFoundException;
@@ -23,6 +24,7 @@ abstract class Action
     protected SettingsInterface $settings;
     protected Twig $twig;
     protected Messages $message;
+    protected MailerInterface $mailer;
 
     protected Request $request;
     protected Response $response;
@@ -34,11 +36,13 @@ abstract class Action
         SettingsInterface $settings,
         Twig $twig,
         Messages $message,
+        MailerInterface $mailer,
     ) {
         $this->logger = $logger;
         $this->settings = $settings;
         $this->twig = $twig;
         $this->message = $message;
+        $this->mailer = $mailer;
     }
 
     /**

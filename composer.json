@@ -9,7 +9,10 @@
         "pdo",
         "twig",
         "migration",
-        "seeder"
+        "seeder",
+        "email",
+        "sendmail",
+        "form"
     ],
     "license": "MIT",
     "authors": [
@@ -30,6 +33,7 @@
         "slim/psr7": "^1.5",
         "slim/slim": "^4.10",
         "slim/twig-view": "^3.3",
+        "symfony/mailer": "^6.2",
         "vlucas/phpdotenv": "^5.5"
     },
     "require-dev": {

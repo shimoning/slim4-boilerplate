@@ -24,6 +24,10 @@ use Slim\Views\Twig;
 use App\Application\Extensions\TwigCsrfExtension;
 use App\Exceptions\HttpCsrfException;
 
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mailer\Mailer;
+use Symfony\Component\Mailer\Transport;
+
 return function (ContainerBuilder $containerBuilder) {
     $containerBuilder->addDefinitions([
         App::class => function (ContainerInterface $container) {
@@ -76,6 +80,10 @@ return function (ContainerBuilder $containerBuilder) {
             $environment = $twig->getEnvironment();
             $environment->addGlobal('flash', $m);
             return $twig;
+        },
+        MailerInterface::class => function () {
+            // TODO: support other protocol
+            return new Mailer(Transport::fromDsn('sendmail://default'));
         },
     ]);
 };
