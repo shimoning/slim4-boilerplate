@@ -27,6 +27,7 @@ use App\Exceptions\HttpCsrfException;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mailer\Transport;
+use Symfony\Component\Mailer\Transport\SendmailTransport;
 
 return function (ContainerBuilder $containerBuilder) {
     $containerBuilder->addDefinitions([
@@ -83,6 +84,10 @@ return function (ContainerBuilder $containerBuilder) {
         },
         MailerInterface::class => function () {
             // TODO: support other protocol
+            $sendmailPath = ini_get('sendmail_path');
+            if ($sendmailPath) {
+                return new Mailer(new SendmailTransport($sendmailPath));
+            }
             return new Mailer(Transport::fromDsn('sendmail://default'));
         },
     ]);

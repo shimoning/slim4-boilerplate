@@ -5,8 +5,9 @@
 * Twig
 * Migration
 * Seeder
-* anti-CSRF
 * PDO repository
+* CSRF Prevention
+* Email
 
 
 ## Dotenv
