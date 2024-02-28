@@ -94,7 +94,7 @@ class HttpErrorHandler extends SlimErrorHandler
 
             /** @var Twig $twig */
             $twig = $this->container->get(Twig::class);
-            $response->getBody()->write($twig->fetch('errors/default', [
+            $response->getBody()->write($twig->fetch('errors/default.twig', [
                 'statusCode' => $statusCode,
                 'error' => $error,
             ]));
